@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1574437191 source:c:\users\anderson\documents\roboquelimpaomundo\main.cpp
+	<iostream>
+	<stdlib.h>
+	<stdio.h>
+	<time.h>
+
