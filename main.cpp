@@ -5,13 +5,14 @@
 
 #define INDIVIDUOS 10
 #define PASSOS 20
+#define TOTAL_ITERACOES 100
+#define TOTAL_MATRIZES 2
 
 using namespace std;
 
 const int linha = 10;
 const int coluna = 10;
 int matMundo[12][12];
-int matIndividuos[INDIVIDUOS][PASSOS];
 
 int numAleatorio2()
 {
@@ -61,13 +62,13 @@ void imprimeMatrizMundo()
 }
 
 
-void imprimeMatrizIndividuos()
+void imprimeMatrizIndividuos(int **mat)
 {
     for(int i = 0; i < INDIVIDUOS; i++)
     {
         for(int j = 0; j < PASSOS; j++)
         {
-            cout << matIndividuos[i][j] << " ";
+            cout << mat[i][j] << " ";
         }
         printf("\n");
     }
@@ -83,34 +84,52 @@ int pontuacao(int linha)
     return soma;
 }
 
-void geraPontuacao()
+void geraPontuacao(int **mat)
 {
     for(int i = 0; i < INDIVIDUOS; i++)
     {
         for(int j = 0; j < PASSOS; j++)
         {
-            matIndividuos[i][j] = numAleatorio7();
+            mat[i][j] = numAleatorio7();
         }
     }
 }
 
-int pegaPontuacao(int linha)
+int pegaPontuacao(int **mat, int linha)
 {
     int soma = 0;
     for(int j = 0; j < PASSOS; j++)
     {
-        soma += matIndividuos[linha][j];
+        soma += mat[linha][j];
     }
     return soma;
 }
 
 int main()
 {
-    srand(time(NULL));
-    preencheMundo();
-    geraPontuacao();
+    srand(time(NULL)); /// semente para gerar números aleátorios ...
+
+    int **matIndividuos[TOTAL_MATRIZES];
+    for(int i = 0; i < TOTAL_MATRIZES; i++)
+    {
+        matIndividuos[i] = new int*[INDIVIDUOS];
+        for(int j = 0; j < INDIVIDUOS; j++)
+        {
+            matIndividuos[i][j] = new int[PASSOS];
+        }
+    }
+
+    preencheMundo(); /// preenchendo a matriz mundo ...
+    geraPontuacao(matIndividuos[0]); /// preenchendo a matriz de pontuação ...
+
     imprimeMatrizMundo();
-    imprimeMatrizIndividuos();
-    cout << pegaPontuacao(5);
+    imprimeMatrizIndividuos(matIndividuos[0]);
+    for(int iteracao = 0; iteracao < TOTAL_ITERACOES; iteracao++)
+    {
+        /// cruzamento ...
+        /// mutacao ...
+    }
+
+    //cout << pegaPontuacao(5);
     return 0;
 }
