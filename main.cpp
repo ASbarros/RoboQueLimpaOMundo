@@ -1,7 +1,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <stdio.h>
-#include<time.h>/// necess·rio p/ funÁ„o time() ...
+#include<time.h>/// necess√°rio p/ fun√ß√£o time() ...
 
 #define INDIVIDUOS 10
 #define PASSOS 20
@@ -48,36 +48,69 @@ void preencheMundo()
     }
 }
 
-void imprimeMatriz(){
-    for(int i = 0; i < linha +2;i++){
-        for(int j = 0; j < coluna +2; j++){
+void imprimeMatrizMundo()
+{
+    for(int i = 0; i < linha +2; i++)
+    {
+        for(int j = 0; j < coluna +2; j++)
+        {
             cout << matMundo[i][j] << " ";
         }
         printf("\n");
     }
 }
 
-int pontuacao(int linha){
+
+void imprimeMatrizIndividuos()
+{
+    for(int i = 0; i < INDIVIDUOS; i++)
+    {
+        for(int j = 0; j < PASSOS; j++)
+        {
+            cout << matIndividuos[i][j] << " ";
+        }
+        printf("\n");
+    }
+}
+
+int pontuacao(int linha)
+{
     int soma = 0;
-    for(int i = 1; i <= coluna; i++){
+    for(int i = 1; i <= coluna; i++)
+    {
         soma += matMundo[linha][i];
     }
     return soma;
 }
 
-void geraPontuacao(int *mat[INDIVIDUOS][PASSOS]){
-    for(int i = 0; i < INDIVIDUOS; i++){
-        for(int j = 0; j < PASSOS; j++){
-            *mat[i][j] = numAleatorio7();
+void geraPontuacao()
+{
+    for(int i = 0; i < INDIVIDUOS; i++)
+    {
+        for(int j = 0; j < PASSOS; j++)
+        {
+            matIndividuos[i][j] = numAleatorio7();
         }
     }
+}
+
+int pegaPontuacao(int linha)
+{
+    int soma = 0;
+    for(int j = 0; j < PASSOS; j++)
+    {
+        soma += matIndividuos[linha][j];
+    }
+    return soma;
 }
 
 int main()
 {
     srand(time(NULL));
     preencheMundo();
-    imprimeMatriz();
-    geraPontuacao(&matIndividuos]);
+    geraPontuacao();
+    imprimeMatrizMundo();
+    imprimeMatrizIndividuos();
+    cout << pegaPontuacao(5);
     return 0;
 }
